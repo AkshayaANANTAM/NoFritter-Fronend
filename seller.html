@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller - Grocery Entry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #c5d8a8; /* Slightly darker green background */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: transparent; /* No white background, fully transparent */
+            border-radius: 8px;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #d0e6bb;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #333;
+            font-size: 28px;
+        }
+
+        /* Form Sections */
+        h2 {
+            color: #4B9C3A;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        /* Grocery Items Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #4B9C3A;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #d0e6bb;
+            color: #333;
+        }
+
+        td input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Product Description Form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group label {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .upload-btn {
+            background-color: #4B9C3A;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .upload-btn:hover {
+            background-color: #3a7b2b;
+        }
+
+        /* Camera Icon */
+        .camera-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .camera-btn img {
+            width: 30px; /* Size of the camera icon */
+            height: auto;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+        }
+
+        /* Modal Popup Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .modal-content input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .modal-btn {
+            background-color: #4B9C3A;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-btn:disabled {
+            background-color: #ccc; /* Disable button color */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Seller Grocery Entry</h1>
+        </div>
+
+        <!-- Section 1: Grocery Items Table -->
+        <div class="section">
+            <h2>Grocery Items</h2>
+            <table>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Grocery Items</th>
+                    <th>Quantity</th>
+                    <th>Cost per Item</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" placeholder="Enter Item Name"></td>
+                    <td><input type="text" placeholder="Enter Quantity"></td>
+                    <td><input type="text" placeholder="Enter Cost"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="text" placeholder="Enter Item Name"></td>
+                    <td><input type="text" placeholder="Enter Quantity"></td>
+                    <td><input type="text" placeholder="Enter Cost"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="text" placeholder="Enter Item Name"></td>
+                    <td><input type="text" placeholder="Enter Quantity"></td>
+                    <td><input type="text" placeholder="Enter Cost"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><input type="text" placeholder="Enter Item Name"></td>
+                    <td><input type="text" placeholder="Enter Quantity"></td>
+                    <td><input type="text" placeholder="Enter Cost"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 2: Product Description -->
+        <div class="section">
+            <h2>Product Description</h2>
+            <form id="sellerForm" onsubmit="return handleSubmit(event)">
+                <div class="form-group">
+                    <label for="manufactureDate">Date of Mfg:</label>
+                    <input type="date" id="manufactureDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="expiryDate">Date of Expiry:</label>
+                    <input type="date" id="expiryDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="bestBefore">Best Before:</label>
+                    <input type="text" id="bestBefore" placeholder="e.g., 6 months after opening">
+                </div>
+
+                <!-- Camera Upload Input with Camera Icon beside Upload Button -->
+                <div class="form-group">
+                    <label for="imageUpload">Upload Product Image:</label>
+                    <input type="file" id="imageUpload" accept="image/*" capture="environment" onchange="showPopup()"
+                           style="display:none;">
+                    <button class="upload-btn" type="button" onclick="document.getElementById('imageUpload').click()">Upload</button>
+                    <button class="camera-btn" onclick="document.getElementById('imageUpload').click()">
+                        <img src="no fritter images/camera.jpg" alt="Camera Icon"> <!-- Replace with actual path to camera icon -->
+                    </button>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="image-preview" id="imagePreview">
+                    <p>Image Preview:</p>
+                    <img id="imageDisplay" src="" alt="Image Preview">
+                </div>
+
+                <button class="upload-btn" id="submitBtn" type="submit" disabled>Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p>You must agree to follow the food safety rules and regulations to proceed.</p>
+            <label>
+                <input type="checkbox" id="agreeCheckbox" onchange="toggleSubmit()"> I agree to follow the food safety rules and regulations.
+            </label>
+            <button class="modal-btn" id="modalCloseBtn" onclick="closePopup()" disabled>Proceed</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to show the modal after image upload
+        function showPopup() {
+            const imageInput = document.getElementById('imageUpload');
+            const imageDisplay = document.getElementById('imageDisplay');
+            const imagePreview = document.getElementById('imagePreview');
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                imageDisplay.src = e.target.result;
+                imagePreview.style.display = "block";
+            };
+
+            reader.readAsDataURL(file);
+
+            // Show the modal
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        // Close popup only if checkbox is checked
+        function closePopup() {
+            const agreeCheckbox = document.getElementById('agreeCheckbox');
+            if (agreeCheckbox.checked) {
+                document.getElementById('modal').style.display = 'none';
+                // Optionally, you can proceed to the next step here
+            }
+        }
+
+        // Enable Proceed button when the checkbox is checked
+        function toggleSubmit() {
+            const agreeCheckbox = document.getElementById('agreeCheckbox');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (agreeCheckbox.checked) {
+                modalCloseBtn.disabled = false;
+                submitBtn.disabled = false;
+            } else {
+                modalCloseBtn.disabled = true;
+                submitBtn.disabled = true;
+            }
+        }
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+            showPopup(); // Show terms and conditions popup
+        }
+    </script>
+</body>
+</html>

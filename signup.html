@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up for No Fritter</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline CSS to increase input box size */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 300px; /* Increased width */
+            padding: 10px; /* Increased padding */
+            margin: 10px 0; /* Margin for spacing */
+            border: 1px solid #ccc; /* Border style */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .signup-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            margin-top: 10px; /* Space between buttons */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px; /* Location of the box */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px; /* Max width for modal */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo" class="logo">
+        <h1>Nourish the Needy, Not the Bin.</h1>
+    </div>
+
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+
+        <!-- Signup Form -->
+        <form id="signupForm" onsubmit="signup(event)">
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <input type="text" id="lastName" placeholder="Last Name" required>
+            <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+            <input type="password" id="password" placeholder="Password" required>
+            
+            <p>Sign up using:</p>
+            <button type="button" onclick="signupWithGoogle()">Sign up with Google</button>
+            <button type="button" onclick="signupWithFacebook()">Sign up with Facebook</button>
+            <button type="submit">Next</button> <!-- Change to submit for form handling -->
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <div id="signupMessage"></div> <!-- Div to display signup messages -->
+    </div>
+
+    <!-- Modal for Terms and Conditions -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms and Conditions</h2>
+            </div>
+            <p>Please read the following terms and conditions carefully before signing up:</p>
+            <ul>
+                <li>All food donations must be safe for consumption.</li>
+                <li>Donors must ensure proper packaging and labeling of donated food.</li>
+                <li>Donors agree to comply with local food safety regulations.</li>
+                <li>The app reserves the right to refuse any donations that do not meet safety standards.</li>
+                <li>By donating, donors consent to their information being shared with recipients.</li>
+                <li>Terms and conditions may be updated periodically; continued use of the app signifies acceptance of any changes.</li>
+            </ul>
+            <div class="modal-footer">
+                <button onclick="agreeTerms()">Agree and Create Account</button>
+                <button onclick="closeTermsModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Signup handling logic
+        function signup(event) {
+            event.preventDefault(); // Prevent default form submission
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const password = document.getElementById('password').value;
+            const signupMessageDiv = document.getElementById('signupMessage');
+
+            // Validate inputs
+            if (!firstName || !lastName || !phoneNumber || !password) {
+                signupMessageDiv.textContent = "Please fill in all fields.";
+                return;
+            }
+
+            // API request for signup
+            fetch('http://localhost:5000/api/signup', {
+                method: 'POST',
+                body: JSON.stringify({ firstName, lastName, phoneNumber, password }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Signup failed. Please try again.");
+                }
+                return response.json(); // Parse JSON response
+            })
+            .then(result => {
+                // Redirect to dashboard or login after successful signup
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            })
+            .catch(error => {
+                signupMessageDiv.textContent = error.message; // Display error message
+            });
+        }
+
+        // Google Sign-Up Function
+        function signupWithGoogle() {
+            alert("Sign up with Google is not yet implemented. Please integrate with Google API.");
+        }
+
+        // Facebook Sign-Up Function
+        function signupWithFacebook() {
+            alert("Sign up with Facebook is not yet implemented. Please integrate with Facebook API.");
+        }
+
+        // Open the Terms and Conditions modal
+        function openTermsModal() {
+            document.getElementById("termsModal").style.display = "block";
+        }
+
+        // Close the Terms and Conditions modal
+        function closeTermsModal() {
+            document.getElementById("termsModal").style.display = "none";
+        }
+
+        // Agree to terms and create account
+        function agreeTerms() {
+            closeTermsModal(); // Close modal
+            signup(); // Call signup function
+        }
+    </script>
+</body>
+</html>

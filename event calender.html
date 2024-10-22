@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Dynamic Calendar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Dancing font -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-size: cover;
+      background-position: center;
+      transition: background-color 0.5s ease;
+    }
+
+    .calendar-container {
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #4CAF50;
+    }
+
+    .tagline {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .calendar #month {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .calendar #locations {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .calendar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .calendar li {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .navigation button {
+      margin: 10px 5px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .navigation button:hover {
+      background-color: #388E3C;
+      transform: scale(1.05);
+    }
+
+    .logo {
+      width: 80px; /* Adjust based on logo size */
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar-container">
+    <h1>NO FRITTER</h1>
+    <img src="no fritter images/no fritter logo.png" alt="nofritter Logo" class="logo"> <!-- Replace with actual logo URL -->
+    <div class="tagline">Nourish the needy, not the bin</div>
+    <div class="calendar">
+      <div id="month"></div>
+      <div id="locations"></div>
+      <div class="navigation">
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const months = [
+      {
+        name: "January",
+        locations: [
+          { name: "Raichandini Mall, Kompally", date: "Jan 5" },
+          { name: "GSM Mall, Chandanagar", date: "Jan 12" },
+          { name: "Infinity Mall, Madeenaguda", date: "Jan 19" },
+          { name: "Srujana Mall, KPHB Colony", date: "Jan 26" }
+        ],
+        bgColor: "#D9EAD3", // Light green background
+      },
+      {
+        name: "February",
+        locations: [
+          { name: "Raichandini Mall, Kompally", date: "Feb 3" },
+          { name: "GSM Mall, Chandanagar", date: "Feb 10" },
+          { name: "Infinity Mall, Madeenaguda", date: "Feb 17" },
+          { name: "Srujana Mall, KPHB Colony", date: "Feb 24" }
+        ],
+        bgColor: "#B6D7A8", // Medium light green background
+      },
+      {
+        name: "March",
+        locations: [
+          { name: "Forum Mall, Kukatpally", date: "Mar 2" },
+          { name: "Inorbit Mall, Hitech City", date: "Mar 9" },
+          { name: "GVK One, Banjara Hills", date: "Mar 16" },
+          { name: "City Center, Madhapur", date: "Mar 23" }
+        ],
+        bgColor: "#A4C8A1", // Medium green background
+      },
+      {
+        name: "April",
+        locations: [
+          { name: "Sarath City Mall, Kondapur", date: "Apr 6" },
+          { name: "Monda Market, Secunderabad", date: "Apr 13" },
+          { name: "Shilparamam, Hitech City", date: "Apr 20" },
+          { name: "Next Galleria Mall, Panjagutta", date: "Apr 27" }
+        ],
+        bgColor: "#A1DAB4", // Slightly darker green background
+      },
+      {
+        name: "May",
+        locations: [
+          { name: "Raichandini Mall, Kompally", date: "May 4" },
+          { name: "GSM Mall, Chandanagar", date: "May 11" },
+          { name: "Infinity Mall, Madeenaguda", date: "May 18" },
+          { name: "Srujana Mall, KPHB Colony", date: "May 25" }
+        ],
+        bgColor: "#A1D5A8", // Darker green background
+      },
+      {
+        name: "June",
+        locations: [
+          { name: "Next Galleria Mall, Panjagutta", date: "Jun 1" },
+          { name: "Hyderabad Central Mall", date: "Jun 8" },
+          { name: "Shilparamam, Hitech City", date: "Jun 15" },
+          { name: "Sarath City Mall, Kondapur", date: "Jun 22" }
+        ],
+        bgColor: "#78B90B", // Dark green background
+      },
+      {
+        name: "July",
+        locations: [
+          { name: "GVK One, Banjara Hills", date: "Jul 7" },
+          { name: "Forum Mall, Kukatpally", date: "Jul 14" },
+          { name: "Shilparamam, Hitech City", date: "Jul 21" },
+          { name: "Raichandini Mall, Kompally", date: "Jul 28" }
+        ],
+        bgColor: "#4CAF50", // Deep green background
+      },
+      {
+        name: "August",
+        locations: [
+          { name: "GSM Mall, Chandanagar", date: "Aug 4" },
+          { name: "Inorbit Mall, Hitech City", date: "Aug 11" },
+          { name: "Sarath City Mall, Kondapur", date: "Aug 18" },
+          { name: "Infinity Mall, Madeenaguda", date: "Aug 25" }
+        ],
+        bgColor: "#388E3C", // Darker green background
+      },
+      {
+        name: "September",
+        locations: [
+          { name: "City Center, Madhapur", date: "Sep 1" },
+          { name: "GVK One, Banjara Hills", date: "Sep 8" },
+          { name: "Raichandini Mall, Kompally", date: "Sep 15" },
+          { name: "Shilparamam, Hitech City", date: "Sep 22" }
+        ],
+        bgColor: "#2E7D32", // Even darker green background
+      },
+      {
+        name: "October",
+        locations: [
+          { name: "Next Galleria Mall, Panjagutta", date: "Oct 6" },
+          { name: "Infinity Mall, Madeenaguda", date: "Oct 13" },
+          { name: "Forum Mall, Kukatpally", date: "Oct 20" },
+          { name: "GSM Mall, Chandanagar", date: "Oct 27" }
+        ],
+        bgColor: "#1B5E20", // Very dark green background
+      },
+      {
+        name: "November",
+        locations: [
+          { name: "Infinity Mall, Madeenaguda", date: "Nov 3" },
+          { name: "Sarath City Mall, Kondapur", date: "Nov 10" },
+          { name: "Shilparamam, Hitech City", date: "Nov 17" },
+          { name: "City Center, Madhapur", date: "Nov 24" }
+        ],
+        bgColor: "#4CAF50", // Deep green background
+      },
+      {
+        name: "December",
+        locations: [
+          { name: "GVK One, Banjara Hills", date: "Dec 1" },
+          { name: "Raichandini Mall, Kompally", date: "Dec 8" },
+          { name: "GSM Mall, Chandanagar", date: "Dec 15" },
+          { name: "Infinity Mall, Madeenaguda", date: "Dec 22" }
+        ],
+        bgColor: "#2E7D32", // Even darker green background
+      }
+    ];
+
+    let currentMonthIndex = 0;
+
+    function updateCalendar() {
+      const monthInfo = months[currentMonthIndex];
+      document.body.style.backgroundColor = monthInfo.bgColor;
+      document.getElementById("month").innerText = monthInfo.name;
+      document.getElementById("locations").innerHTML = monthInfo.locations.map(location => 
+        `<li>${location.name} - ${location.date}</li>`).join('');
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      currentMonthIndex = (currentMonthIndex > 0) ? currentMonthIndex - 1 : months.length - 1;
+      updateCalendar();
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      currentMonthIndex = (currentMonthIndex < months.length - 1) ? currentMonthIndex + 1 : 0;
+      updateCalendar();
+    });
+
+    updateCalendar(); // Initial call to display the first month
+  </script>
+</body>
+</html>

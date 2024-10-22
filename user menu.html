@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Fritter - User Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D0E6BB;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+        .header {
+            display: flex; /* Flexbox for side-by-side alignment */
+            align-items: center; /* Vertically center items */
+            justify-content: center; /* Center the header content */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .logo {
+            width: 80px; /* Adjust logo size */
+            height: auto;
+            margin-right: 15px; /* Spacing between logo and heading */
+        }
+        .sidebar {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 300px; /* Adjust width as necessary */
+            margin: 0 auto; /* Center the sidebar */
+        }
+        h1, h2, .tagline {
+            margin: 0; /* Remove default margin */
+            font-weight: bold; /* Bold heading */
+            text-transform: uppercase; /* Capitalizing */
+        }
+        .tagline {
+            font-size: 16px; /* Adjust tagline size */
+            color: #4B9C3A; /* Tagline color */
+            margin-top: 5px; /* Spacing for tagline */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 25px; /* Rounded corners */
+            background-color: #4B9C3A; /* Green background for items */
+            text-align: center; /* Center text */
+            font-weight: bold; /* Bold list items */
+            position: relative; /* Position relative for dropdown */
+        }
+        a {
+            text-decoration: none;
+            color: #fff; /* Link color */
+            display: block; /* Makes the entire area clickable */
+        }
+        a:hover {
+            opacity: 0.8; /* Slightly darker on hover */
+        }
+        .more-options {
+            background-color: #D0E6BB; /* Background color for more options */
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px; /* Spacing above */
+            cursor: pointer; /* Show pointer on hover */
+        }
+        .dropdown {
+            display: none; /* Hidden by default */
+            position: absolute; /* Position dropdown relative to li */
+            top: 100%; /* Align below the More option */
+            left: 50%; /* Center the dropdown */
+            transform: translateX(-50%); /* Center horizontally */
+            background-color: #e9ecef; /* Background color for dropdown */
+            padding: 10px;
+            border-radius: 8px; /* Rounded corners for dropdown */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1; /* Ensure dropdown is above other elements */
+        }
+        li:hover .dropdown {
+            display: block; /* Show dropdown on hover */
+        }
+        .account-title {
+            text-align: center; /* Center account title */
+            margin-bottom: 20px; /* Spacing below account title */
+            display: flex; /* Flexbox for aligning icon and text */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+        .user-icon {
+            width: 50px; /* Size of user icon */
+            height: auto;
+            margin-right: 10px; /* Spacing between icon and title */
+        }
+        .block-container {
+            display: flex; /* Flexbox for side-by-side layout */
+            justify-content: space-between; /* Space between the blocks */
+            margin-bottom: 20px; /* Spacing below the blocks */
+        }
+        .block {
+            background-color: #4B9C3A; /* Green background for blocks */
+            color: white; /* White text */
+            border-radius: 12px; /* Rounded corners */
+            padding: 20px;
+            text-align: center; /* Center text */
+            flex: 1; /* Make blocks take equal space */
+            margin: 0 5px; /* Spacing between blocks */
+        }
+        .block-title {
+            font-weight: bold; /* Bold title */
+            margin-bottom: 10px; /* Spacing below title */
+        }
+        .block-content {
+            font-size: 14px; /* Smaller font for content */
+        }
+        .block-icon {
+            width: 40px; /* Icon size */
+            height: auto;
+            margin-bottom: 10px; /* Spacing below icon */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo" class="logo">
+        <div>
+            <h1>No Fritter</h1>
+            <p class="tagline">Nourish the needy, not the bin</p>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="account-title">
+            <img src="no fritter images/user profile.png" alt="User Profile Icon" class="user-icon"> <!-- User icon -->
+            <h2>Account</h2>
+        </div>
+
+        <!-- Subscription and Reward Points Section -->
+        <div class="block-container">
+            <div class="block">
+                <img src="no fritter images/supercoin.png" alt="Super Coin Icon" class="block-icon"> <!-- Replace with actual icon path -->
+                <div class="block-title">Subscription</div>
+                <div class="block-content">Active Plan: Basic Plan<br>Renewal Date: 12/12/2024</div>
+            </div>
+            <div class="block">
+                <img src="no fritter images/reward icon.png" alt="Reward Points Icon" class="block-icon"> <!-- Replace with actual icon path -->
+                <div class="block-title">Reward Points</div>
+                <div class="block-content">Current Points: 120<br>Expiry Date: 12/12/2025</div>
+            </div>
+        </div>
+
+        <ul>
+            <li><a href="subscription.html">Subscription</a></li>
+            <li><a href="rewards.html">Reward Points</a></li>
+            <li><a href="donated.html">Donated Food</a></li>
+            <li><a href="received.html">Received Food</a></li>
+            <li><a href="top rating.html">Top Rated Restaurants</a></li>
+            <li><a href="event calender.html">Event Calender</a></li>
+            <li class="more-options">More
+                <div class="dropdown">
+                    <ul>
+                        <li><a href="languages.html">Choose Language</a></li>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                        <li><a href="about us.html">About Us</a></li>
+                        <li><a href="feedback.html">* Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+</body>
+</html>

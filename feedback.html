@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback and Logout</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light background color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for content */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styles */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            margin-bottom: 30px;
+            background-color: #d0e6bb; /* Light green background */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .feedback-section label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .feedback-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none; /* Prevent resizing of the textarea */
+            margin-bottom: 20px; /* Space below textarea */
+        }
+
+        .submit-btn {
+            background-color: #4B9C3A; /* Button color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #3a7b2b; /* Darker shade on hover */
+        }
+
+        /* Thank You Message */
+        .thank-you-message {
+            display: none; /* Hidden by default */
+            text-align: center;
+            color: #4B9C3A; /* Green color for thank you message */
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Logout Section */
+        .logout-section {
+            background-color: #e9f5e9; /* Light background for logout */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .logout-btn {
+            background-color: #ff4d4d; /* Logout button color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            width: 40%;
+        }
+
+        .logout-btn:hover {
+            background-color: #cc0000; /* Darker shade on hover */
+        }
+
+        .cancel-btn {
+            background-color: #ccc; /* Cancel button color */
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background-color: #aaa; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Feedback Section -->
+        <div class="feedback-section">
+            <h1>Feedback</h1>
+            <label for="feedback">Feedback</label>
+            <textarea id="feedback" class="feedback-textarea" placeholder="Write your feedback here..."></textarea>
+            <button type="submit" class="submit-btn" onclick="submitFeedback()">Submit</button>
+            <div id="thankYouMessage" class="thank-you-message">Thank you for your feedback!</div>
+        </div>
+
+        <!-- Logout Section -->
+        <div class="logout-section">
+            <h1>Logout</h1>
+            <button class="logout-btn">This Device</button>
+            <button class="logout-btn">All Devices</button>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function submitFeedback() {
+            const feedback = document.getElementById('feedback').value;
+
+            if (feedback.trim() === "") {
+                alert("Please provide your feedback before submitting.");
+                return; // Stop the function if feedback is empty
+            }
+
+            // You can handle the feedback submission logic here (e.g., send to server)
+
+            // Show thank you message
+            document.getElementById('thankYouMessage').style.display = 'block';
+            document.getElementById('feedback').value = ""; // Clear the textarea
+        }
+    </script>
+</body>
+</html>

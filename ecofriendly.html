@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Friendly Products | NoFritter</title>
+    <style>
+        /* General Page Layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2e1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #ffeb3b;
+        }
+
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            margin-top: 5px;
+            color: #fff3cd;
+        }
+
+        .cart {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart span {
+            font-weight: bold;
+        }
+
+        /* Notification Badge */
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            font-size: 12px;
+        }
+
+        .search-filter {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 50%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+        }
+
+        /* Product Description */
+        .product-description {
+            color: #555;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Cart and Checkout Pages */
+        .checkout-section {
+            display: none;
+            margin-top: 40px;
+        }
+
+        .cart-item {
+            margin-top: 10px;
+        }
+
+        /* Linking to NoFritter */
+        .nofritter {
+            color: #2d3436;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .nofritter a {
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Tagline Font */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">NoFritter</div>
+        <div class="tagline">"Eco-Friendly Living Starts Here!"</div>
+        <div id="cart" class="cart" onclick="openCart()">
+            🛒 Cart: <span id="cart-count">0</span> items | Total: ₹<span id="cart-total">0</span>
+            <div id="cart-badge" class="cart-badge" style="display: none;"></div>
+        </div>
+    </header>
+
+    <!-- Eco-friendly Products Section -->
+    <section id="products">
+        <h2>Our Eco-Friendly Products</h2>
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>Eco Bamboo Toothbrush</td>
+                <td>
+                    <div class="product-description">A biodegradable bamboo toothbrush that ensures oral hygiene without harming the environment.</div>
+                </td>
+                <td>₹50</td>
+                <td><button onclick="addToCart('Eco Bamboo Toothbrush', 50)">Add to Cart</button></td>
+            </tr>
+            <tr>
+                <td>Reusable Cotton Bags</td>
+                <td>
+                    <div class="product-description">Durable and washable cotton bags, perfect for grocery shopping and reducing plastic usage.</div>
+                </td>
+                <td>₹100</td>
+                <td><button onclick="addToCart('Reusable Cotton Bags', 100)">Add to Cart</button></td>
+            </tr>
+            <tr>
+                <td>Stainless Steel Water Bottle</td>
+                <td>
+                    <div class="product-description">A long-lasting, insulated bottle made from eco-friendly stainless steel. Say goodbye to plastic bottles!</div>
+                </td>
+                <td>₹300</td>
+                <td><button onclick="addToCart('Stainless Steel Water Bottle', 300)">Add to Cart</button></td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart-section" class="checkout-section">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+    </section>
+
+    <!-- Checkout Section -->
+    <section id="checkout-section" class="checkout-section">
+        <h2>Checkout</h2>
+        <p>Total Price: ₹<span id="checkout-total">0</span></p>
+        <h3>Enter Address:</h3>
+        <textarea id="address" placeholder="Enter your delivery address here..." rows="4" style="width:100%;"></textarea><br><br>
+        <button onclick="submitOrder()">Submit Order</button>
+    </section>
+
+    <!-- Link to NoFritter App -->
+    <section class="nofritter">
+        <h3>Reduce Food Wastage with <a href="#">NoFritter App</a></h3>
+        <p>Donate excess food, find local food donations, and make a sustainable impact!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Thank you for supporting eco-friendly products. Together, we make a difference!</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        let cart = [];
+        let totalCost = 0;
+
+        // Add to Cart Function
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            totalCost += price;
+            updateCartUI();
+            showNotificationBadge();
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            document.getElementById("cart-count").innerText = cart.length;
+            document.getElementById("cart-total").innerText = totalCost;
+            document.getElementById("checkout-total").innerText = totalCost;
+        }
+
+        // Show Notification Badge on Cart
+        function showNotificationBadge() {
+            const badge = document.getElementById("cart-badge");
+            badge.style.display = 'block';
+            badge.innerText = cart.length;
+        }
+
+        // Open Cart Section
+        function openCart() {
+            document.getElementById("products").style.display = 'none';
+            document.getElementById("cart-section").style.display = 'block';
+            document.getElementById("checkout-section").style.display = 'none';
+            let cartItems = '';
+            cart.forEach(item => {
+                cartItems += `<div class="cart-item">${item.product} - ₹${item.price}</div>`;
+            });
+            document.getElementById("cart-items").innerHTML = cartItems;
+        }
+
+        // Proceed to Checkout
+        function proceedToCheckout() {
+            document.getElementById("cart-section").style.display = 'none';
+            document.getElementById("checkout-section").style.display = 'block';
+        }
+
+        // Submit Order
+        function submitOrder() {
+            const address = document.getElementById("address").value;
+            if (address === '') {
+                alert("Please enter your delivery address.");
+            } else {
+                alert("Order submitted successfully!\nTotal Price: ₹" + totalCost + "\nDelivery to: " + address);
+                // Clear cart and reset UI after order
+                cart = [];
+                totalCost = 0;
+                updateCartUI();
+                document.getElementById("cart-section").style.display = 'none';
+                document.getElementById("checkout-section").style.display = 'none';
+                document.getElementById("products").style.display = 'block';
+                document.getElementById("cart-badge").style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

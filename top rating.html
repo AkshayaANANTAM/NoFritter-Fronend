@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Restaurants Near You</title>
+    <style>
+        body {
+            background-color: #D0E6BB; /* Light green background */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Styling for the overall app name */
+        .app-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #4B9C3A;
+            margin-top: 20px;
+        }
+
+        /* Tagline styling */
+        .tagline {
+            text-align: center;
+            font-family: 'Dancing Script', cursive; /* Dancing font for tagline */
+            font-size: 22px;
+            color: #4B9C3A;
+            margin-bottom: 40px;
+        }
+
+        /* Heading for the popular restaurants */
+        .header {
+            text-align: center;
+            font-size: 28px;
+            margin: 40px 0 20px 0; /* Added more space from the top */
+            font-weight: bold;
+            color: #333;
+        }
+
+        .find-restaurants-btn {
+            background-color: #4B9C3A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .find-restaurants-btn:hover {
+            background-color: #3A7B2A;
+        }
+
+        #restaurantList {
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        .restaurant-item {
+            margin: 20px;
+            padding: 10px;
+            background-color: #F7F7F7;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant-name {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .restaurant-description {
+            margin-top: 5px;
+            color: #666;
+        }
+
+        /* Small Image Style */
+        .small-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .user-profile {
+            font-weight: bold;
+            font-size: 18px;
+            color: #4B9C3A;
+        }
+
+        /* Camera Icon */
+        .camera-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: 10px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- App Name and Tagline -->
+    <h1 class="app-title">NO FRITTER</h1>
+    <div class="tagline">Nourish the needy, not the bin</div>
+
+    <!-- Header Section for Popular Restaurants -->
+    <h1 class="header">Popular Restaurants Near You</h1>
+
+    <!-- User Profile Section -->
+    <div class="user-info">
+        <img src="no fritter images/user profile.png" alt="User" class="small-img">
+        <span class="user-profile">User Profile</span>
+        <img src="no fritter images/camera.jpg" alt="Camera" class="camera-icon">
+    </div>
+
+    <!-- Button to Find Restaurants -->
+    <button class="find-restaurants-btn" onclick="getLocation()">Find Restaurants</button>
+
+    <!-- Display the list of nearby restaurants -->
+    <div id="restaurantList"></div>
+
+    <script>
+        // Geolocation and restaurant-related functions go here
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Call the function to get restaurants based on the user's location
+            getRestaurants(latitude, longitude);
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        const restaurants = [
+            {
+                name: "DC Family Restaurant",
+                description: "A popular family dining spot known for its South Indian dishes.",
+                lat: 17.3850,
+                lon: 78.4867 // Example coordinates (Hyderabad)
+            },
+            {
+                name: "Hamsafar Family Restaurant",
+                description: "A cozy place with a wide variety of multi-cuisine offerings.",
+                lat: 17.4500,
+                lon: 78.3800
+            },
+            {
+                name: "Red Fort Family Restaurant",
+                description: "Known for its authentic Mughlai and North Indian cuisine.",
+                lat: 17.4000,
+                lon: 78.5000
+            }
+        ];
+
+        function getRestaurants(userLat, userLon) {
+            const nearbyRestaurants = restaurants.filter(restaurant => {
+                const distance = calculateDistance(userLat, userLon, restaurant.lat, restaurant.lon);
+                return distance <= 5; // Show restaurants within 5 km radius
+            });
+
+            displayRestaurants(nearbyRestaurants);
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the Earth in km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c; // Distance in km
+            return distance;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180);
+        }
+
+        function displayRestaurants(restaurants) {
+            const restaurantList = document.getElementById('restaurantList');
+            restaurantList.innerHTML = '';
+
+            if (restaurants.length === 0) {
+                restaurantList.innerHTML = '<p>No popular restaurants found nearby.</p>';
+                return;
+            }
+
+            restaurants.forEach(restaurant => {
+                const restaurantItem = document.createElement('div');
+                restaurantItem.classList.add('restaurant-item');
+
+                const restaurantName = document.createElement('h3');
+                restaurantName.textContent = restaurant.name;
+                restaurantName.classList.add('restaurant-name');
+
+                const restaurantDescription = document.createElement('p');
+                restaurantDescription.textContent = restaurant.description;
+                restaurantDescription.classList.add('restaurant-description');
+
+                restaurantItem.appendChild(restaurantName);
+                restaurantItem.appendChild(restaurantDescription);
+                restaurantList.appendChild(restaurantItem);
+            });
+        }
+    </script>
+
+</body>
+</html>

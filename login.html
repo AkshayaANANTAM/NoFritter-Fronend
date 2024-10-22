@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to No Fritter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo" class="logo">
+        <h1>Nourish the Needy, Not the Bin.</h1>
+    </div>
+
+    <div class="login-container">
+        <h2>Login to Your Account</h2>
+        
+        <!-- Login Form -->
+        <form id="loginForm" onsubmit="login(event)">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        <div id="message"></div> <!-- Div to display messages -->
+    </div>
+
+    <script>
+        // Login handling logic
+        function login(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+
+            // Validate input
+            if (!email || !password) {
+                messageDiv.textContent = "Please enter both email and password.";
+                return;
+            }
+
+            // API request for login
+            fetch('http://localhost:5000/api/login/email', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Invalid email or password.");
+                }
+                return response.json(); // Parse JSON response
+            })
+            .then(result => {
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            })
+            .catch(error => {
+                messageDiv.textContent = error.message; // Display error message
+            });
+        }
+    </script>
+</body>
+</html>

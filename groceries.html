@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries Retail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Dancing Script Font -->
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light background */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for content */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #d0e6bb; /* Background color for the header */
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        .header img {
+            width: 100px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 10px; /* Space below the logo */
+        }
+
+        .header h1 {
+            margin: 0; /* Remove default margin */
+            color: #333;
+            font-size: 30px; /* Font size for title */
+            font-family: Arial, sans-serif; /* Regular font for heading */
+        }
+
+        .header p {
+            font-family: 'Dancing Script', cursive; /* Dancing font for tagline */
+            color: #4B9C3A; /* Color for the tagline */
+            font-size: 24px; /* Font size for tagline */
+            margin: 5px 0; /* Space above and below tagline */
+        }
+
+        /* Content Section */
+        img {
+            max-width: 100%; /* Make sure image doesn't exceed container width */
+            border-radius: 10px;
+            margin-bottom: 20px; /* Space below image */
+        }
+
+        /* Specific style to reduce groceries image */
+        .groceries-img {
+            width: 250px; /* Reduced width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #4B9C3A; /* Button color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3a7b2b; /* Darker green on hover */
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo"> <!-- Add your actual logo image path -->
+            <h1>No Fritter</h1>
+            <p>Nourish the needy, not the bin</p>
+        </div>
+
+        <!-- Groceries Retail Section -->
+        <h2>Groceries Retail</h2>
+        <img src="no fritter images/groceries.jpg" alt="Groceries Image" class="groceries-img"> <!-- Image with reduced size -->
+
+        <div class="buttons">
+            <button class="btn" onclick="goToSeller()">SELLER</button>
+            <button class="btn" onclick="goToCustomer()">CUSTOMER</button>
+        </div>
+    </div>
+
+    <script>
+        function goToSeller() {
+            window.location.href = 'seller.html'; // Redirect to the seller page
+        }
+
+        function goToCustomer() {
+            window.location.href = 'buyer.html'; // Redirect to the customer page
+        }
+    </script>
+</body>
+</html>

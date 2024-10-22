@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Language</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for content */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* No Fritter Section */
+        .header {
+            background-color: #d0e6bb; /* Background color for the header */
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        .header h1 {
+            margin: 0; /* Remove default margin */
+            color: #333;
+            font-size: 30px; /* Font size for title */
+        }
+
+        .header p {
+            margin: 5px 0; /* Space above and below tagline */
+            color: #4B9C3A; /* Color for the tagline */
+            font-size: 18px; /* Font size for tagline */
+        }
+
+        /* Logo */
+        .logo {
+            width: 100px; /* Adjust logo width as needed */
+            margin-bottom: 10px; /* Space below logo */
+        }
+
+        .language-item {
+            background-color: #d0e6bb; /* Light blue background for language items */
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .language-item:hover {
+            background-color: #b2ebf2; /* Darker blue on hover */
+        }
+
+        #google_translate_element {
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- No Fritter Header Section -->
+        <div class="header">
+            <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo" class="logo"> <!-- Replace with your logo path -->
+            <h1>No Fritter</h1>
+            <p>Nourish the needy, not the bin</p>
+        </div>
+
+        <h1 id="app-title">Select Language</h1>
+        <div id="language-list"></div>
+
+        <!-- Google Translate Widget -->
+        <div id="google_translate_element"></div>
+
+        <div id="content">
+            <p id="description">This is a sample application. Select a language to change the content.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const languages = {
+                "English": {
+                    title: "Select Language",
+                    description: "This is a sample application. Select a language to change the content."
+                },
+                "Telugu": {
+                    title: "భాష ఎంచుకోండి",
+                    description: "ఇది ఒక నమూనా అనువర్తనం. కంటెంట్‌ని మార్చడానికి భాషను ఎంచుకోండి."
+                },
+                "Hindi": {
+                    title: "भाषा चुनें",
+                    description: "यह एक नमूना एप्लिकेशन है। सामग्री को बदलने के लिए एक भाषा चुनें।"
+                },
+                "Spanish": {
+                    title: "Seleccionar idioma",
+                    description: "Esta es una aplicación de muestra. Seleccione un idioma para cambiar el contenido."
+                },
+                "French": {
+                    title: "Choisir la langue",
+                    description: "Ceci est une application d'exemple. Sélectionnez une langue pour changer le contenu."
+                },
+                "German": {
+                    title: "Sprache auswählen",
+                    description: "Dies ist eine Musteranwendung. Wählen Sie eine Sprache, um den Inhalt zu ändern."
+                },
+                "Chinese": {
+                    title: "选择语言",
+                    description: "这是一个示例应用程序。选择一种语言以更改内容。"
+                },
+                "Japanese": {
+                    title: "言語を選択",
+                    description: "これはサンプルアプリケーションです。コンテンツを変更するには言語を選択してください。"
+                },
+                "Korean": {
+                    title: "언어 선택",
+                    description: "샘플 애플리케이션입니다. 콘텐츠를 변경하려면 언어를 선택하십시오."
+                },
+                "Italian": {
+                    title: "Seleziona lingua",
+                    description: "Questa è un'applicazione di esempio. Seleziona una lingua per cambiare il contenuto."
+                },
+                "Portuguese": {
+                    title: "Selecionar idioma",
+                    description: "Este é um aplicativo de exemplo. Selecione um idioma para mudar o conteúdo."
+                },
+                "Arabic": {
+                    title: "اختر اللغة",
+                    description: "هذا تطبيق نموذجي. اختر لغة لتغيير المحتوى."
+                },
+                "Russian": {
+                    title: "Выберите язык",
+                    description: "Это пример приложения. Выберите язык, чтобы изменить содержимое."
+                },
+                "Turkish": {
+                    title: "Dil Seçin",
+                    description: "Bu bir örnek uyguladır. İçeriği değiştirmek için bir dil seçin."
+                }
+            };
+
+            const languageList = document.getElementById('language-list');
+            const appTitle = document.getElementById('app-title');
+            const description = document.getElementById('description');
+
+            for (const language in languages) {
+                const languageItem = document.createElement('div');
+                languageItem.className = 'language-item';
+                languageItem.textContent = language;
+
+                languageItem.addEventListener('click', function() {
+                    appTitle.textContent = languages[language].title;
+                    description.textContent = languages[language].description;
+                });
+
+                languageList.appendChild(languageItem);
+            }
+        });
+
+        // Google Translate
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,te,hi,es,fr,de,zh-CN,ja,ko,it,pt,ar,ru,tr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Plans - No Fritter</title>
+    <style>
+        body {
+            background-color: #f4f9e9; /* Soft green background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff; /* White background for content */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #4B9C3A; /* Dark green for heading */
+            margin: 10px 0;
+        }
+
+        .subscription-cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #e7f7d3; /* Light green card */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            flex: 1;
+            max-width: 300px; /* Card width */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .card img {
+            width: 70%; /* Reduced size of the image */
+            height: auto;
+            border-radius: 10px;
+            max-height: 150px; /* Optional: limit height to maintain aspect ratio */
+        }
+
+        .card h2 {
+            color: #4B9C3A; /* Dark green */
+            margin: 15px 0;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #FF5722; /* Orange for price */
+        }
+
+        .features {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .subscribe-button {
+            background-color: #4B9C3A; /* Green button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .subscribe-button:hover {
+            background-color: #3f7b30; /* Darker green on hover */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Subscription Plans</h1>
+        </div>
+
+        <div class="subscription-cards">
+            <div class="card">
+                <img src="no fritter images/basic.png" alt="Basic Plan">
+                <h2>Basic Plan</h2>
+                <p class="price">₹400/month</p>
+                <div class="features">
+                    <ul>
+                        <li>Access to basic features</li>
+                        <li>Monthly newsletters</li>
+                        <li>Community support</li>
+                    </ul>
+                </div>
+                <button class="subscribe-button">Subscribe Now</button>
+            </div>
+
+            <div class="card">
+                <img src="no fritter images/standard.jpeg" alt="Standard Plan">
+                <h2>Standard Plan</h2>
+                <p class="price">₹800/month</p>
+                <div class="features">
+                    <ul>
+                        <li>All Basic Plan features</li>
+                        <li>Exclusive content</li>
+                        <li>Priority support</li>
+                    </ul>
+                </div>
+                <button class="subscribe-button">Subscribe Now</button>
+            </div>
+
+            <div class="card">
+                <img src="no fritter images/premium sub.gif" alt="Premium Plan">
+                <h2>Premium Plan</h2>
+                <p class="price">₹1200/month</p>
+                <div class="features">
+                    <ul>
+                        <li>All Standard Plan features</li>
+                        <li>Personalized support</li>
+                        <li>Early access to new features</li>
+                    </ul>
+                </div>
+                <button class="subscribe-button">Subscribe Now</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Choose the plan that suits you best and start your journey with No Fritter today!</p>
+        </div>
+    </div>
+</body>
+</html>

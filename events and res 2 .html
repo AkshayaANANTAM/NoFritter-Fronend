@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Details</title>
+    <style>
+        body {
+            background-color: #D0E6BB; /* Light green background */
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 28px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .input-field, .dropdown-field {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #4b9c3a; /* Light blue background */
+            color: #000; /* Black text color */
+        }
+
+        .input-field::placeholder {
+            color: #000; /* Black placeholder text */
+        }
+
+        .upload-btn {
+            background-color: #4B9C3A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .upload-btn:hover {
+            background-color: #3A7B2A;
+        }
+
+        .back-arrow {
+            font-size: 24px;
+            color: #4B9C3A;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .camera-icon {
+            font-size: 50px;
+            margin-top: 10px;
+            color: #4B9C3A;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Donation Details Page -->
+    <div class="back-arrow" onclick="goBack()">←</div> <!-- Back arrow to navigate to the previous page -->
+    <h1 class="header">Donation Details</h1>
+
+    <div class="form-container">
+        <label for="food-type">Foods type that you want to donate:</label>
+        <select id="food-type" class="dropdown-field">
+            <option value="TIFFIN">TIFFIN</option>
+            <option value="LUNCH">LUNCH</option>
+            <option value="SNACKS">SNACKS</option>
+            <option value="DINNER">DINNER</option>
+            <option value="OTHERS">OTHERS</option>
+        </select>
+
+        <label for="food-name">Food Name:</label>
+        <input type="text" id="food-name" class="input-field" placeholder="Enter food name">
+
+        <label for="others">Others (Optional):</label>
+        <input type="text" id="others" class="input-field" placeholder="Enter other details">
+
+        <div>
+            <span class="camera-icon" onclick="uploadImage()">📷</span>
+            <p>Click the camera, and upload the photo</p>
+        </div>
+
+        <button class="upload-btn">Upload</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back(); // Navigate to the previous page
+        }
+
+        function uploadImage() {
+            // Functionality for image upload can be handled here
+            alert("Upload image functionality will be added.");
+        }
+    </script>
+
+</body>
+</html>

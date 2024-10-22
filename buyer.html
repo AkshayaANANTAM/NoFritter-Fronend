@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Fritter - Food Waste Reduction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Add Google Fonts -->
+    <style>
+        /* Basic styling for layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #b7d99b; /* Updated background color to a little darker */
+        }
+        h1 {
+            color: #333;
+        }
+        #logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #logo img {
+            max-width: 150px; /* Adjust logo size */
+        }
+        .tagline {
+            font-family: 'Dancing Script', cursive; /* Apply Dancing Script font */
+            font-size: 24px; /* Adjust font size as needed */
+            color: #333; /* Tagline text color */
+            margin: 10px 0;
+        }
+        #cart, .address-form, .payment-form, #product-list {
+            background: #d0e6bb; /* Updated section background color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        #cart ul, #product-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #cart li, #product-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">
+        <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo"> <!-- Replace with your logo URL -->
+        <h1>No Fritter</h1>
+        <p class="tagline">Nourish the needy, not the bin</p> <!-- Styled tagline -->
+    </div>
+
+    <div id="product-list">
+        <h2>Select Products</h2>
+        <ul>
+            <li>
+                Apple - ₹100 <button onclick="addToCart('Apple', 100)">Add to Cart</button>
+            </li>
+            <li>
+                Banana - ₹50 <button onclick="addToCart('Banana', 50)">Add to Cart</button>
+            </li>
+            <li>
+                Orange - ₹70 <button onclick="addToCart('Orange', 70)">Add to Cart</button>
+            </li>
+            <li>
+                Grapes - ₹120 <button onclick="addToCart('Grapes', 120)">Add to Cart</button>
+            </li>
+        </ul>
+    </div>
+
+    <div id="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be dynamically populated -->
+        </ul>
+        <p id="total-cost">Total: ₹0</p>
+        <button onclick="nextStep()">Next</button>
+        <button onclick="clearCart()">Clear Cart</button>
+        <button onclick="closeCart()">Close</button>
+    </div>
+
+    <div class="address-form" id="address-form" style="display: none;">
+        <h2>Enter Your Address</h2>
+        <input type="text" id="address-input" placeholder="Enter your address" required>
+        <button onclick="proceedToPayment()">Proceed to Payment</button>
+        <button onclick="useGPS()">Use GPS</button>
+    </div>
+
+    <div class="payment-form" id="payment-form" style="display: none;">
+        <h2>Payment Information</h2>
+        <input type="text" id="card-number" placeholder="Card Number" required>
+        <input type="text" id="expiry-date" placeholder="Expiry Date (MM/YY)" required>
+        <input type="text" id="cvv" placeholder="CVV" required>
+        <button onclick="submitPayment()">Submit Payment</button>
+    </div>
+
+    <script>
+        let cart = [];
+        let totalCost = 0;
+
+        // Add to Cart Function
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            totalCost += price;
+            updateCartUI();
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const cartItems = document.getElementById("cart-items");
+            cartItems.innerHTML = cart.map(item => `<li>${item.product} - ₹${item.price}</li>`).join('');
+            document.getElementById("total-cost").innerText = `Total: ₹${totalCost}`;
+        }
+
+        // Proceed to Address Entry
+        function nextStep() {
+            document.getElementById("address-form").style.display = "block"; // Show address form
+            document.getElementById("cart").style.display = "none"; // Hide cart
+        }
+
+        // Clear Cart Function
+        function clearCart() {
+            cart = [];
+            totalCost = 0;
+            updateCartUI();
+            alert('Cart cleared!');
+            location.reload(); // Reload the page to return to the main view
+        }
+
+        // Close Cart Function
+        function closeCart() {
+            location.reload(); // Reload the page to return to the main view
+        }
+
+        // Proceed to Payment Function
+        function proceedToPayment() {
+            const address = document.getElementById("address-input").value;
+            if (address) {
+                alert(`Proceeding to payment for the address: ${address}`);
+                document.getElementById("payment-form").style.display = "block"; // Show payment form
+                document.getElementById("address-form").style.display = "none"; // Hide address form
+            } else {
+                alert("Please enter your address.");
+            }
+        }
+
+        // Submit Payment Function
+        function submitPayment() {
+            const cardNumber = document.getElementById("card-number").value;
+            const expiryDate = document.getElementById("expiry-date").value;
+            const cvv = document.getElementById("cvv").value;
+
+            if (cardNumber && expiryDate && cvv) {
+                alert(`Payment successful! Card Number: ${cardNumber}`);
+                // Implement further payment logic here
+            } else {
+                alert("Please fill in all payment fields.");
+            }
+        }
+
+        // Use GPS Function
+        function useGPS() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    alert(`Your location: Latitude: ${lat}, Longitude: ${lon}`);
+                    // You can also convert this location to an address using a geocoding API if needed
+                }, function() {
+                    alert("Unable to retrieve your location.");
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    </script>
+</body>
+</html>

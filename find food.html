@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Available Food - No Fritter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D0E6BB;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: center; /* Center the header content */
+            align-items: center;
+            padding: 20px;
+            background-color: #d0e6bb;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Space between logo and title */
+        }
+
+        .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .title-container {
+            text-align: center; /* Center the title and tagline */
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2b2b2b;
+            margin: 0;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #4B9C3A;
+            margin-top: 5px;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px; /* Space between title and icons */
+        }
+
+        .icon {
+            width: 40px;
+            height: auto;
+            margin-left: 10px;
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #d4ebf2;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2b2b2b;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #D0E6BB;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #foodResults {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section with Logo, Title, Tagline, and Icons -->
+    <div class="header">
+        <div class="logo-container">
+            <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo" class="logo"> <!-- Replace with actual logo path -->
+        </div>
+        <div class="title-container">
+            <h1 class="title">No Fritter</h1>
+            <p class="tagline">Nourish the needy, not the bin</p>
+        </div>
+        <div class="icons">
+            <img src="no fritter images/user profile.png" alt="User Profile Icon" class="icon"> <!-- Replace with actual user profile icon path -->
+            <img src="no fritter images/supercoin.png" alt="Super Coin Icon" class="icon"> <!-- Replace with actual supercoin icon path -->
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>Find Available Food</h1>
+        <form id="foodForm">
+            <label for="peopleCount">Number of People:</label>
+            <input type="number" id="peopleCount" name="peopleCount" min="1" required>
+
+            <label for="foodType">Type of Food Needed:</label>
+            <select id="foodType" name="foodType" required>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="non-vegetarian">Non-Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="any">Any</option>
+            </select>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter your location" required>
+
+            <button type="submit">Find Food</button>
+        </form>
+
+        <div id="foodResults">
+            <!-- Food results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('foodForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Collect input data
+            const peopleCount = document.getElementById('peopleCount').value;
+            const foodType = document.getElementById('foodType').value;
+            const location = document.getElementById('location').value.trim();
+
+            if (location === "") {
+                document.getElementById('foodResults').innerHTML = `<p>Please enter a valid location.</p>`;
+                return;
+            }
+
+            // Show loading message
+            const foodResultsDiv = document.getElementById('foodResults');
+            foodResultsDiv.innerHTML = `<p>Searching for available food...</p>`;
+
+            // Prepare data to send to backend
+            const requestData = {
+                people: peopleCount,
+                foodType: foodType,
+                location: location
+            };
+
+            // Send request to backend
+            fetch('http://localhost:3000/api/findFood', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the results in the #foodResults div
+                if (data.food.length > 0) {
+                    let resultHTML = `<h2>Available Food</h2><ul>`;
+                    data.food.forEach(item => {
+                        resultHTML += `<li>${item.name} - ${item.quantity} servings</li>`;
+                    });
+                    resultHTML += `</ul>`;
+                    foodResultsDiv.innerHTML = resultHTML;
+                } else {
+                    foodResultsDiv.innerHTML = `<p>No food found for the provided criteria.</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                foodResultsDiv.innerHTML = `<p>There was an error finding food. Please try again.</p>`;
+            });
+        });
+    </script>
+
+</body>
+</html>

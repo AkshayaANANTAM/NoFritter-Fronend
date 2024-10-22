@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Dancing Font -->
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for content */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #d0e6bb; /* Background color for the header */
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        .header img {
+            width: 100px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 10px; /* Space below the logo */
+        }
+
+        .header h1 {
+            margin: 0; /* Remove default margin */
+            color: #333;
+            font-size: 30px; /* Font size for title */
+            font-family: Arial, sans-serif; /* Regular font for heading */
+        }
+
+        .header p {
+            font-family: 'Dancing Script', cursive; /* Dancing font for tagline */
+            color: #4B9C3A; /* Color for the tagline */
+            font-size: 24px; /* Font size for tagline */
+            margin: 5px 0; /* Space above and below tagline */
+        }
+
+        /* Section Styles */
+        .section {
+            margin: 20px 0; /* Space between sections */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e9f5e9; /* Light green background */
+        }
+
+        .section h2 {
+            margin-top: 0; /* Remove top margin */
+            color: #333;
+        }
+
+        /* Form Styles */
+        form {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px; /* Space above label */
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Space below input */
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and label */
+        }
+
+        .submit-btn {
+            background-color: #4B9C3A; /* Button color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #3a7b2b; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo"> <!-- Logo Image -->
+            <h1>No Fritter</h1> <!-- Regular font for the heading -->
+            <p>Nourish the needy, not the bin</p> <!-- Dancing font for the tagline -->
+        </div>
+
+        <!-- Edit Profile Section -->
+        <div class="section">
+            <h2>Edit Profile</h2>
+            <form>
+                <label for="username">Change Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter new username">
+
+                <label for="email">Change Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter new email">
+
+                <label for="password">Change Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter new password">
+
+                <label for="phone">Change Phone Number</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter new phone number">
+
+                <button type="submit" class="submit-btn">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Notification Settings Section -->
+        <div class="section">
+            <h2>Notification Settings</h2>
+            <div>
+                <label>
+                    <input type="checkbox" id="notifications" name="notifications" checked> Enable Notifications
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Save Notification Settings</button>
+        </div>
+
+        <!-- Account Settings Section -->
+        <div class="section">
+            <h2>Account Settings</h2>
+            <div>
+                <div>Delete Account</div>
+            </div>
+            <label for="account-privacy">Account Privacy</label>
+            <select id="account-privacy" name="account-privacy">
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+                <option value="friends-only">Friends Only</option>
+            </select>
+
+            <label>
+                <input type="checkbox" id="location" name="location"> Enable Location
+            </label>
+
+            <button type="submit" class="submit-btn">Save Account Settings</button>
+        </div>
+    </div>
+</body>
+</html>

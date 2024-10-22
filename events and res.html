@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Restaurants</title>
+    <style>
+        body {
+            background-color: #D0E6BB; /* Light green background */
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px; /* Reduced font size */
+            margin: 15px 0;  /* Reduced margin */
+            font-weight: bold;
+            color: #333;
+        }
+
+        .table-container {
+            margin: 0 auto;
+            width: 90%;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px; /* Reduced margin */
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #4B9C3A; /* Border around table */
+        }
+
+        th, td {
+            padding: 10px; /* Reduced padding */
+            text-align: center;
+            font-size: 14px; /* Smaller text size */
+        }
+
+        th {
+            background-color: #A8D8B9; /* Lighter green */
+        }
+
+        td {
+            background-color: #77C181; /* Slightly darker green */
+        }
+
+        .upload-btn {
+            background-color: #4B9C3A;
+            color: white;
+            padding: 8px 16px; /* Reduced padding */
+            border: none;
+            border-radius: 5px;
+            font-size: 16px; /* Slightly smaller font */
+            cursor: pointer;
+            margin-top: 15px; /* Reduced margin */
+        }
+
+        .upload-btn:hover {
+            background-color: #3A7B2A;
+        }
+
+        .back-arrow {
+            font-size: 20px; /* Reduced font size */
+            color: #4B9C3A;
+            cursor: pointer;
+            margin-bottom: 15px; /* Reduced margin */
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 6px; /* Reduced padding */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #4B9C3A; /* Set background to green */
+            color: white; /* White text color */
+            font-size: 14px; /* Smaller text size */
+        }
+
+        .input-field::placeholder {
+            color: white; /* White placeholder text */
+        }
+
+        .camera-input {
+            margin-top: 15px; /* Reduced margin */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .camera-input img {
+            margin-top: 8px; /* Reduced margin */
+            width: 80px; /* Smaller size for the image preview */
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #4B9C3A; /* Optional border for the image */
+        }
+
+        .camera-icon {
+            width: 20px; /* Smaller size for the camera icon */
+            height: auto;
+            vertical-align: middle; /* Align the icon vertically with text */
+            margin-right: 5px; /* Space between the icon and text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- First Page: Events & Restaurants -->
+    <div class="back-arrow" onclick="goBack()">←</div> <!-- Back arrow that navigates to the previous page -->
+    <h1 class="header">EVENTS & RESTAURANTS</h1>
+    <table class="table-container">
+        <thead>
+            <tr>
+                <th>Sl. No</th>
+                <th>Food Items</th>
+                <th>People</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><input type="text" class="input-field" placeholder="Enter food item"></td>
+                <td><input type="number" class="input-field" placeholder="Enter number of people"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><input type="text" class="input-field" placeholder="Enter food item"></td>
+                <td><input type="number" class="input-field" placeholder="Enter number of people"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><input type="text" class="input-field" placeholder="Enter food item"></td>
+                <td><input type="number" class="input-field" placeholder="Enter number of people"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><input type="text" class="input-field" placeholder="Enter food item"></td>
+                <td><input type="number" class="input-field" placeholder="Enter number of people"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><input type="text" class="input-field" placeholder="Enter food item"></td>
+                <td><input type="number" class="input-field" placeholder="Enter number of people"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="camera-input">
+        <label for="cameraInput" class="upload-btn">
+            <img src="https://img.icons8.com/ios-filled/50/000000/camera.png" class="camera-icon" alt="Camera Icon">Upload Food Photo
+        </label>
+        <input type="file" id="cameraInput" accept="image/*" capture="camera" style="display:none;"> <!-- Camera input -->
+        <img id="imagePreview" alt="Image Preview" style="display:none;"> <!-- Image preview -->
+        <button class="upload-btn">Upload</button> <!-- Button to confirm upload -->
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back(); // Navigates to the previous page
+        }
+
+        document.querySelector('.upload-btn').addEventListener('click', function() {
+            const cameraInput = document.getElementById('cameraInput');
+            cameraInput.click(); // Programmatically click the file input
+        });
+
+        document.getElementById('cameraInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const imgPreview = document.getElementById('imagePreview');
+                imgPreview.src = e.target.result; // Set the image source to the uploaded file
+                imgPreview.style.display = 'block'; // Display the image preview
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a data URL
+            }
+        });
+    </script>
+
+</body>
+</html>

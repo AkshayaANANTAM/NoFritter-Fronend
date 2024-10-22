@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Importing Dancing Script font -->
+    <title>Donation Categories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D0E6BB;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h2 {
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .category {
+            background-color: #7ccb6c;
+            border-radius: 35px; /* More curved oval */
+            padding: 15px;
+            margin: 10px auto;
+            width: 220px; /* Adjusted width for better aesthetics */
+            height: 60px; /* Adjusted height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em; /* Increased font size for better visibility */
+            font-weight: bold; /* Bold text */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s; /* Transition effect */
+            text-decoration: none; /* Remove underline from the link */
+        }
+        .category:hover {
+            background-color: #66a857; /* Darker green on hover */
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px; /* Space between header and categories */
+        }
+        .header img {
+            margin-right: 10px; /* Space between the logo and text */
+            height: 50px; /* Size of the logo */
+        }
+        .tagline {
+            font-family: 'Dancing Script', cursive; /* Applying Dancing Script font */
+            font-size: 1.5em; /* Slightly larger font size */
+            margin-top: 10px; /* Space above the tagline */
+            font-style: italic; /* Tagline styling */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <img src="no fritter images/no fritter logo.png" alt="No Fritter Logo">
+        <h1>No Fritter</h1>
+        <img src="no fritter images/supercoin.png" alt="Super Coin Icon" style="height: 40px; margin-left: 10px;">
+        <img src="no fritter images/user profile.png" alt="User Profile Icon" style="height: 40px; margin-left: 10px;">
+    </div>
+
+    <!-- Tagline -->
+    <p class="tagline">Nourish the needy, not the bin</p>
+
+    <!-- Donation Categories -->
+    <h2>Donation Categories</h2>
+    <div class="category" onclick="location.href='events and res.html'">Events</div>
+    <div class="category" onclick="location.href='events and res.html'">Restaurants</div>
+    <div class="category" onclick="location.href='events and res 2 .html'">Household</div>
+    <div class="category" onclick="location.href='events and res 2 .html'">Others</div>
+
+</body>
+</html>

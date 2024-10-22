@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donated Food - No Fritter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D0E6BB;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .food-item {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px auto;
+            max-width: 500px;
+            text-align: left; /* Align text to the left */
+        }
+        .food-item h2 {
+            margin: 0;
+        }
+        .back-button, .donate-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #7ccb6c;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none; /* Remove underline from the link */
+        }
+        .donate-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Donated Food Details</h1>
+
+    <!-- Conditionally render based on donation status -->
+    <div id="donationStatus">
+        <!-- Placeholder for the donated food details -->
+    </div>
+
+    <div class="donate-container">
+        <h2>You have not donated anything until now.</h2>
+        <p>If you would like to donate food, please click the button below:</p>
+        <button class="donate-button" id="donateButton">Donate Food</button>
+    </div>
+
+    <a href="user menu.html" class="back-button">Back to Account</a>
+
+    <script>
+        // Sample data to simulate donated food (You can fetch this data from your backend)
+        const donatedFood = []; // Replace with actual data
+
+        // Function to render donation status
+        function renderDonationStatus() {
+            const donationStatusDiv = document.getElementById('donationStatus');
+
+            if (donatedFood.length > 0) {
+                donatedFood.forEach(item => {
+                    const foodItemDiv = document.createElement('div');
+                    foodItemDiv.className = 'food-item';
+                    foodItemDiv.innerHTML = `
+                        <h2>${item.name}</h2>
+                        <p>Date: ${item.date}</p>
+                        <p>Address: ${item.address}</p>
+                    `;
+                    donationStatusDiv.appendChild(foodItemDiv);
+                });
+            } else {
+                donationStatusDiv.innerHTML = `
+                    <h2>You have not donated anything until now.</h2>
+                    <p>If you would like to donate food, please click the button below:</p>
+                `;
+            }
+        }
+
+        // Event listener for the donation button
+        document.getElementById('donateButton').addEventListener('click', function() {
+            // Here you would implement the donation functionality,
+            // for example, redirecting to a donation form page.
+            alert('Redirecting to the donation form...');
+            window.location.href = 'donation.html'; // Uncomment this when you have the form
+        });
+
+        // Render the donation status on page load
+        renderDonationStatus();
+    </script>
+
+</body>
+</html>

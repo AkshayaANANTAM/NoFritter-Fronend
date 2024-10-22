@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c8e3c8; /* Darker background color */
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #d0e6bb; /* New box color */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 300px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .order-summary {
+            margin: 20px 0;
+        }
+
+        .address-selector, .confirmation {
+            background-color: #d0e6bb; /* New box color */
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 300px;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        @keyframes dance {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(5px); }
+            100% { transform: translateY(0); }
+        }
+
+        .tagline {
+            font-family: 'Dancing Script', cursive; /* Dancing font */
+            font-size: 18px;
+            animation: dance 1s infinite; /* Dance effect */
+        }
+
+        .logo {
+            max-width: 100px; /* Adjust logo size */
+            margin: 10px auto;
+        }
+
+        .tracking-message {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #map {
+            height: 300px; /* Set the height of the map */
+            width: 100%; /* Set the width of the map */
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Import Dancing Script font -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script> <!-- Include Google Maps API -->
+</head>
+<body>
+    <div class="header">
+        <img src="no fritter images/no fritter logo.png" alt="Nofritter Logo" class="logo"> <!-- Add your logo image here -->
+        <h1>Nofritter</h1>
+        <p class="tagline">Nourish the needy, not the bin</p>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Congratulations</h1>
+        <div class="order-summary">
+            <p>Your order has been placed successfully!</p>
+            <p>Your order will be delivered soon...</p>
+        </div>
+        <button onclick="openAddressSelector()">Select Delivery Place</button>
+        <button onclick="trackOrder()">Track Order</button> <!-- Track Order button -->
+        <div class="tracking-message" id="trackingMessage">
+            <p>Your order is currently being prepared and will be on its way shortly!</p>
+        </div>
+        <div id="map"></div> <!-- Map container -->
+    </div>
+
+    <div class="address-selector" id="addressSelector" style="display: none;">
+        <h2>SELECT ADDRESS</h2>
+        <select id="savedAddresses">
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Other">Other</option>
+        </select>
+        <p>DELIVERS TO: <span id="delivery-address">Home</span></p>
+        <button onclick="confirmOrder()">Confirm</button>
+    </div>
+
+    <div class="confirmation" id="confirmationMessage" style="display: none;">
+        <h2>Congratulations</h2>
+        <p>Your delivery partner name is <span id="delivery-partner">XXXXXXX</span>.</p>
+        <p>Your order will be delivered within 10-15 minutes.</p>
+    </div>
+
+    <script>
+        function openAddressSelector() {
+            document.getElementById('addressSelector').style.display = 'block';
+        }
+
+        function confirmOrder() {
+            const selectedAddress = document.getElementById('savedAddresses').value;
+            document.getElementById('delivery-address').innerText = selectedAddress;
+            document.getElementById('addressSelector').style.display = 'none';
+            document.getElementById('confirmationMessage').style.display = 'block';
+        }
+
+        function trackOrder() {
+            document.getElementById('trackingMessage').style.display = 'block'; // Show tracking message
+            
+            // Replace 'YOUR_DELIVERY_PARTNER_ID' with the actual ID of the delivery partner
+            fetch('/api/delivery-location/YOUR_DELIVERY_PARTNER_ID')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the map with the fetched location
+                    initMap(data.lat, data.lng);
+                })
+                .catch(error => console.error('Error fetching location:', error));
+        }
+
+        // Initialize Google Map with dynamic coordinates
+        function initMap(lat, lng) {
+            const deliveryLocation = { lat: lat, lng: lng }; // Use fetched coordinates
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: deliveryLocation,
+            });
+            const marker = new google.maps.Marker({
+                position: deliveryLocation,
+                map: map,
+                title: "Delivery Partner Location",
+            });
+        }
+    </script>
+</body>
+</html>
